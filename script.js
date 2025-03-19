@@ -7,81 +7,80 @@
  является ли она палиндромом. Если да - функция возвращает 
  true, если нет - false; */
 
-function isPolnumandrom(str) {
+function isPalindrom(str) {
+  let strLowNoSpaces = str.toLowerCase().replaceAll(' ', '');
   let check = '';
-  for (let i = str.length -1; i >= 0; --i) {
-    check += str[i];
+  for (let i = strLowNoSpaces.length -1; i >= 0; --i) {
+    check += strLowNoSpaces[i];
   }
-  return str == check;
+  return strLowNoSpaces === check;
 }
 
-console.log(isPolnumandrom('шабаш'));
+console.log(isPalindrom('А роза упала на лапу Азора'));
 //------------------------------------------
+
+
 
 /* 2. Напиши функцию, которая принимает строку (предложение) 
 и находит первое самое короткое слово в ней и возвращает его; */
 
-let str = 'первое самое короткое слово';
-const arranumStr = str.split(' ');
-let shortestWord = arranumStr[0];
-for (let i = 0; i < arranumStr.length; i++) {
-  if (arranumStr[i].length < shortestWord.length) {
-    shortestWord = arranumStr[i];
+function shortestWordFinder(str) {
+  const arr = str.split(' ');
+  let shortestWord = arr[0];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].length < shortestWord.length) {
+      shortestWord = arr[i];
+    }
+    if (arr == '') {
+      console.log('строка пуста')
+    }
   }
+  console.log(shortestWord);
+    
 }
 
-console.log(shortestWord);
-//-------------------------------------------
+shortestWordFinder('пусть всегда будет мама')
 
 // 3. Напиши функцию, которая форматирует 
 // строку с цифрами в телефонный номер. 
 // Пример: createPhoneNumber(123456789) → 
 // 8 (123) 456-789;
 
-function splitNumberIntoDigits(number) {
-  return number
-    .toString()
-    .split("");
-    
-}
-const number = 987654321;
-const n = splitNumberIntoDigits(number);
-const operator = n[0] + n[1] + n[2];
-const numFirstHalf = n[3] + n[4] + n[5];
-const numSecondtHalf = n[6] + n[7] + n[8];
-const num = ' ' + '(' + operator +')' + ' ' + numFirstHalf + "-" + numSecondtHalf; 
- 
-function createPhoneNumber(a, b,  operation) {
-  return operation(a, b); 
-}
-const result = (a, b) => a + b; 
 
-console.log(createPhoneNumber(8,  num,  result));
-// Намудрил я здесь конечно ! 
-// Не ругайте за короткие имена) 
-// Чую можно было лаконичнее код написать,
-// но пока ни как не складывается в голове...
-// жду от ментора правки мозгов )))
-//--------------------------------------------------
+//-----------------------------------------------
+
+function createPhoneNumber(number) {
+  const str = String(number);
+  if (str.length !== 9) {
+    return 'Некорреткная длина номера! Ожидается 9 цифр.'
+  }
+    return `8 (${str.slice(0, 3)}) ${str.slice(3, 6)}-${str.slice(6, 9)}`;
+}
+
+console.log(createPhoneNumber(987654321));
 
 // 4. 
 // Напиши функцию, которая ищет минимальное 
 // и максимальное значение в массиве;
 
-const arr = [3, 4, 1, 2, 87, -1, 7];
-arr.sort((a, b) => a - b);
+function minAndMaxElemOfArrFinder(arr) {
+  const sortedArr = [...arr].sort((a, b) => a - b);
+  if (arr == '') {
+    return alert('массив пуст!');
+  }
+  console.log(sortedArr[0], sortedArr[sortedArr.length -1]); 
+}
 
-console.log(arr[0], arr[arr.length -1]);
+minAndMaxElemOfArrFinder([3, 4, 1, 2, 87, -1, 7])
 
 
 // а я в 4-ом задании уже выполнил условие 5-го ) ...
-// или sort нельзя было использовать ???
-// вот без sort , но так намного длиннее код:
+// вот без sort:
 
-const arr2 = [3, 4, 1, 2, 87, -1, 7];
+function minAndMaxElemOfArrFinder2(arr2) {
 let minValueElem = arr2[0];
 let maxValueElem = arr2[0];
-for (i = 0; i < arr2.length; i++) {
+for (let i = 0; i < arr2.length; i++) {
   if (arr2[i] < minValueElem) {
     minValueElem = arr2[i];
   }
@@ -91,6 +90,10 @@ for (i = 0; i < arr2.length; i++) {
 }
 
 console.log(minValueElem, maxValueElem);
+}
+
+minAndMaxElemOfArrFinder2([4, 1, 2, 7])
+
 //----------------------------------------------------
 
 // 5. *Напиши функцию, которая на вход принимает массив, 
@@ -105,3 +108,21 @@ function arraySorter(arr) {
 }
 
 arraySorter([3, 4, 1, 2, 87, -1, 7]);
+
+//----------------------
+// Bubble sort
+
+  let arr = [3, 4, 1, 11, 8, 2];
+  for (let j = arr.length - 1; j > 0; j--) {
+    for (let i = 0; i < j; i++) {
+      if (arr[i] > arr[i + 1]) {
+        let temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+      }
+    }
+  }
+  console.log(arr);
+
+//--------------
+
